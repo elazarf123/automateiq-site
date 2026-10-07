@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AutomateIQ | Every new-patient inquiry answered in under a minute</title>
+<meta name="description" content="Instant replies, qualifying questions, and consult booking for dental practices. Every web form, missed call, and text gets a response in under 60 seconds, 24/7.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f9fa;
+    --ink: #0f2a3a;
+    --ink-soft: #46606e;
+    --line: #d5e0e5;
+    --teal: #0b7a82;
+    --teal-deep: #075a61;
+    --sms-in: #e8eef1;
+    --sms-out: #0b7a82;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.6; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 22px 0; }
+  header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .brand { font-family: var(--display); font-weight: 700; font-size: 22px; text-decoration: none; letter-spacing: -0.01em; }
+  .brand span { color: var(--teal); }
+  .nav-cta { font-weight: 600; font-size: 16px; text-decoration: none; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+
+  .hero { padding: 40px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: center; }
+  h1 { font-family: var(--display); font-weight: 700; font-size: clamp(38px, 5.4vw, 64px); line-height: 1.04; letter-spacing: -0.025em; margin: 0 0 22px; }
+  .lede { font-size: 20px; color: var(--ink-soft); max-width: 34em; margin: 0 0 30px; }
+  .btn { display: inline-block; background: var(--teal); color: #fff; font-weight: 600; font-size: 17px; padding: 15px 26px; border-radius: 8px; text-decoration: none; border: 0; cursor: pointer; font-family: var(--body); }
+  .btn:hover { background: var(--teal-deep); }
+  .btn-note { display: block; margin-top: 12px; font-size: 15px; color: var(--ink-soft); }
+
+  /* Phone thread: the one animated moment on the page */
+  .phone { background: #fff; border: 1px solid var(--line); border-radius: 28px; padding: 18px 16px 16px; max-width: 340px; margin-left: auto; box-shadow: 0 18px 40px -22px rgba(15,42,58,.35); }
+  .phone-top { text-align: center; font-size: 13px; color: var(--ink-soft); padding-bottom: 12px; border-bottom: 1px solid var(--line); margin-bottom: 14px; }
+  .phone-top strong { display: block; color: var(--ink); font-size: 15px; }
+  .msg { max-width: 82%; padding: 10px 14px; border-radius: 18px; font-size: 15.5px; line-height: 1.4; margin: 0 0 10px; opacity: 0; transform: translateY(6px); animation: pop .35s ease forwards; }
+  .msg.in { background: var(--sms-in); border-bottom-left-radius: 6px; }
+  .msg.out { background: var(--sms-out); color: #fff; margin-left: auto; border-bottom-right-radius: 6px; }
+  .msg:nth-of-type(1) { animation-delay: .4s; }
+  .msg:nth-of-type(2) { animation-delay: 1.5s; }
+  .msg:nth-of-type(3) { animation-delay: 2.7s; }
+  .stamp { font-size: 12.5px; color: var(--ink-soft); text-align: center; margin: 4px 0 0; opacity: 0; animation: pop .35s ease 3.6s forwards; }
+  @keyframes pop { to { opacity: 1; transform: none; } }
+
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 3.6vw, 40px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 18px; max-width: 18em; }
+  .two { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
+  .two p { margin: 0 0 16px; color: var(--ink-soft); }
+  .two p strong { color: var(--ink); }
+
+  .list { list-style: none; margin: 0; padding: 0; }
+  .list li { padding: 18px 0 18px 22px; border-left: 3px solid var(--teal); margin-bottom: 14px; }
+  .list li strong { display: block; font-family: var(--display); font-size: 21px; margin-bottom: 2px; }
+  .list li span { color: var(--ink-soft); }
+
+  .steps { counter-reset: s; list-style: none; margin: 0; padding: 0; }
+  .steps li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(s); font-family: var(--display); font-weight: 700; font-size: 26px; color: var(--teal); }
+  .steps li strong { display: block; }
+  .steps li span { color: var(--ink-soft); }
+
+  .trust { background: var(--ink); color: #eaf2f5; border-top: 0; }
+  .trust h2 { color: #fff; }
+  .trust p { color: #b9ccd5; max-width: 40em; margin: 0 0 14px; }
+  .trust ul { margin: 18px 0 0; padding-left: 20px; color: #dbe7ec; }
+  .trust li { margin-bottom: 8px; }
+
+  form { display: grid; gap: 16px; max-width: 520px; }
+  label { font-weight: 600; font-size: 16px; display: grid; gap: 6px; }
+  input { font: inherit; padding: 13px 14px; border: 1px solid #b7c7ce; border-radius: 8px; background: #fff; color: var(--ink); }
+  .form-note { font-size: 15px; color: var(--ink-soft); margin: 0; }
+  .ok { display: none; padding: 16px; border-left: 3px solid var(--teal); background: #e4f1f2; max-width: 520px; }
+
+  footer { padding: 36px 0 56px; border-top: 1px solid var(--line); font-size: 15px; color: var(--ink-soft); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; }
+
+  @media (max-width: 860px) {
+    .hero .wrap, .two { grid-template-columns: 1fr; gap: 36px; }
+    .phone { margin: 0 auto; }
+    section { padding: 56px 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .msg, .stamp { animation: none; opacity: 1; transform: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Automate<span>IQ</span></a>
+    <a class="nav-cta" href="#book" data-booking>Book a 15-minute call</a>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Every new-patient inquiry answered in under a minute.</h1>
+        <p class="lede">Patients asking about implants, Invisalign, and cosmetic work book with whoever replies first. We make sure that is you, including nights and weekends, without adding work for your front desk.</p>
+        <a class="btn" href="#book" data-booking>Book a 15-minute call</a>
+        <span class="btn-note">We'll size the numbers for your practice. No cost, no obligation.</span>
+      </div>
+
+      <div class="phone" role="img" aria-label="Sample text conversation: a patient asks about Invisalign at 9:47 PM and gets an instant reply with a link to book a consult.">
+        <div class="phone-top"><strong>Sample Dental</strong>Saturday 9:47 PM</div>
+        <p class="msg in">Hi, I filled out your form about Invisalign. Are you taking new patients?</p>
+        <p class="msg out">Hi Maria, thanks for reaching out to Sample Dental. Yes, we are. Is this for you, and are mornings or afternoons easier?</p>
+        <p class="msg out">Here's a link to pick a free consult time: automateiq.app/book</p>
+        <p class="stamp">Sample conversation. Reply sent 38 seconds after the form.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap two">
+      <h2>Your front desk can't answer everything at once.</h2>
+      <div>
+        <p>Your team is checking patients in, verifying insurance, and answering phones at the same time. An inquiry that comes in after hours or during a busy morning sits unanswered.</p>
+        <p><strong>That patient doesn't wait.</strong> They contact the next practice on the list, and you never find out they were interested.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <h2>What we set up for you</h2>
+      <ul class="list">
+        <li><strong>An instant reply to every inquiry</strong><span>Web forms, missed calls, and texts each get a text and email within 60 seconds, around the clock.</span></li>
+        <li><strong>A few quick questions</strong><span>What treatment they want, when, and whether they have insurance, so your team starts every call informed.</span></li>
+        <li><strong>Consult booking on your calendar</strong><span>Patients pick a time themselves. Your schedule fills without back-and-forth.</span></li>
+        <li><strong>A front-desk alert</strong><span>Your team gets the lead's details the moment they arrive, so nobody digs through voicemail.</span></li>
+        <li><strong>A monthly report</strong><span>Response times, inquiries, and booked consults, so you can see what the system is doing.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two">
+      <h2>How we get you running</h2>
+      <ol class="steps">
+        <li><div><strong>We talk through your workflow.</strong><span>A 15-minute call, then a written plan you approve.</span></div></li>
+        <li><div><strong>We build and test it.</strong><span>In a separate test environment, using fake leads, before anything touches your patients.</span></div></li>
+        <li><div><strong>You review it with us.</strong><span>Your staff try it and sign off.</span></div></li>
+        <li><div><strong>We go live and watch it.</strong><span>Two weeks of close monitoring, then ongoing care. Most practices are live in about 10 business days.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="wrap">
+      <h2>Built for practices that handle patient information.</h2>
+      <p>We keep patient data out of every workflow that doesn't need it, and we only use vendors that will sign a Business Associate Agreement.</p>
+      <ul>
+        <li>The accounts stay in your name. You can remove our access at any time.</li>
+        <li>Every automation has alerts, so a failure reaches us before it reaches a patient.</li>
+        <li>If something can't be handled automatically, the inquiry goes straight to your front desk. Nothing is dropped.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="book">
+    <div class="wrap two">
+      <div>
+        <h2>See what it would be worth for your practice.</h2>
+        <p>Book a 15-minute call, or send your details and we'll reach out within one business day.</p>
+        <p><a class="btn" href="#" data-booking>Pick a time on the calendar</a></p>
+      </div>
+      <div>
+        <form id="lead-form" novalidate>
+          <label>Your name <input name="name" autocomplete="name" required></label>
+          <label>Practice name <input name="practice" autocomplete="organization" required></label>
+          <label>Email <input name="email" type="email" autocomplete="email" required></label>
+          <label>Phone <input name="phone" type="tel" autocomplete="tel"></label>
+          <button class="btn" type="submit">Send my details</button>
+          <p class="form-note">Please don't include any patient information in this form.</p>
+        </form>
+        <div class="ok" id="ok" role="status">Thanks. We'll reach out within one business day.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Elazar Ferrer, AutomateIQ, Lubbock, TX</span>
+    <span><a href="mailto:you@yourdomain.com" data-email>you@yourdomain.com</a> &nbsp; <a href="tel:+10000000000" data-phone>[Phone]</a></span>
+    <span>&copy; 2026 AutomateIQ</span>
+  </div>
+</footer>
+
+<script>
+  // Fill these in, then you're done.
+  const CONFIG = {
+    BOOKING_URL: "https://cal.com/elazar-ferrer-automate/30min",   // your GoHighLevel calendar link
+    WEBHOOK_URL: "",   // Make.com or GoHighLevel webhook that receives the form
+    EMAIL: "hello@automateiq.app",         // e.g. you@yourdomain.com
+    PHONE: "(806) 705-1977"          // e.g. (806) 555-0100
+  };
+
+  if (CONFIG.BOOKING_URL) document.querySelectorAll("[data-booking]").forEach(a => { a.href = CONFIG.BOOKING_URL; a.target = "_blank"; a.rel = "noopener"; });
+  if (CONFIG.EMAIL) document.querySelectorAll("[data-email]").forEach(a => { a.href = "mailto:" + CONFIG.EMAIL; a.textContent = CONFIG.EMAIL; });
+  if (CONFIG.PHONE) document.querySelectorAll("[data-phone]").forEach(a => { a.href = "tel:" + CONFIG.PHONE.replace(/[^0-9+]/g, ""); a.textContent = CONFIG.PHONE; });
+
+  const form = document.getElementById("lead-form");
+  const ok = document.getElementById("ok");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!data.name || !data.practice || !data.email) { alert("Please add your name, practice name, and email."); return; }
+    if (CONFIG.WEBHOOK_URL) {
+      try {
+        await fetch(CONFIG.WEBHOOK_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+      } catch (err) {
+        alert("Something went wrong sending your details. Please email us directly" + (CONFIG.EMAIL ? " at " + CONFIG.EMAIL : "") + ".");
+        return;
+      }
+    }
+    form.style.display = "none";
+    ok.style.display = "block";
+  });
+</script>
+</body>
+</html>
